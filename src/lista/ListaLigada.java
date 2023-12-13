@@ -5,11 +5,14 @@ public class ListaLigada {
     private Celula ultima = null;
     private int totalDeElementos = 0;
     public void adicionaNoComeco (Object elemento) {
-        Celula nova = new Celula(elemento, primeira);
-        this.primeira = nova;
-
-        if (this.totalDeElementos == 0){
-            this.ultima = this.primeira;
+        if (totalDeElementos ==0){
+            Celula nova = new Celula (elemento);
+            this.primeira = nova;
+            this.ultima = nova;
+        } else {
+            Celula nova = new Celula(elemento, this.primeira);
+            this.primeira.setAnterior(nova);
+            this.primeira = nova;
         }
         totalDeElementos++;
 
@@ -39,8 +42,9 @@ public class ListaLigada {
             adicionaNoComeco(elemento);
         }
 
-        Celula nova = new Celula(elemento, null);
+        Celula nova = new Celula(elemento);
         this.ultima.setProximo(nova);
+        nova.setAnterior(this.ultima);
         this.ultima = nova;
         this.totalDeElementos++;
     }
@@ -67,10 +71,14 @@ public class ListaLigada {
         } else if (posicao == this.totalDeElementos) {
             adicionarNoFinal(elemento);
         } else {
-
             Celula anterior = this.pegaCelula(posicao - 1);
+            Celula proxima = anterior.getProximo();
+
             Celula nova = new Celula(elemento, anterior.getProximo());
+            nova.setAnterior(anterior);
             anterior.setProximo(nova);
+            proxima.setAnterior(nova);
+            proxima.setAnterior(nova);
             this.totalDeElementos++;
         }
     }
@@ -87,7 +95,20 @@ public class ListaLigada {
         this.totalDeElementos--;
     }
     public void remove (int posicao){
+        if (posicao == 0){
+            removeDoComeco();
+        }
+        else if (posicao == totalDeElementos){
+            Celula anterior = this.pegaCelula(posicao - 1);
+            ultima = anterior;
+            totalDeElementos --;
+        }
+        pegaCelula(posicao-1).setProximo(pegaCelula(posicao+1));
+        totalDeElementos--;
+    }
 
+    public void removerNoFinal(){
+        remove(totalDeElementos);
     }
     public int tamanho(){
         return this.totalDeElementos;

@@ -24,5 +24,8 @@ public class testeListaLigada {
         System.out.println(lista.pega(2));
         System.out.println(lista.tamanho());
 
+        lista.remove(1);
+        System.out.println(lista);
+
     }
 }
