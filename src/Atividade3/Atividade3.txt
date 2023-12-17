@@ -1,0 +1,7 @@
+1. Controle de Produção: o objetivo do programa é simular um processo sequencial de produção em uma fábrica, onde há 3 máquinas e cada uma possui uma bandeja de entrada, onde as peças a serem processadas são enfileiradas.
+Quando uma máquina conclui o processamento de uma peça, ela é depositada na bandeja de entrada da próxima máquina, seguindo o processo até a terceira máquina. Para controlar o processo de produção, o programa deve utilizar uma fila, adicionando as peças na fila na ordem em que são produzidas e removendo as peças da fila quando passam por cada etapa de processamento.
+O usuário pode realizar duas ações no programa: (1) adicionar uma quantidade de peças na primeira máquina; (2) indicar o processamento de todas as peças da bandeja em uma máquina específica.
+Toda vez que o usuário executar uma das ações, o programa deve imprimir a fila atual de peças de cada máquina.
+Cada peça adicionada recebe um identificador sequencial;
+Elabore testes unitários que demonstrem que o código está funcionando corretamente.
+2. Manter Ordenado com Operações de Pilha: implemente uma pilha de nomes que, após as operações de push e pop, mantenha sempre em ordem alfabética crescente (menores valores na base e maiores no topo). Não é permitido usar funções de lista ligada para manipular a pilha, ou seja, você deve resolver esse problema usando as funções disponíveis na pilha (pop, push, etc). Elabore testes unitários que demonstrem que o código está funcionando corretamente.

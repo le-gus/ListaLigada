@@ -4,6 +4,21 @@ public class ListaLigada {
     private Celula primeira = null;
     private Celula ultima = null;
     private int totalDeElementos = 0;
+
+
+    public Object pegaPrimeira(){
+        if (this.totalDeElementos == 0){
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        return primeira.getElemento();
+    }
+    public Object pegaUltima() {
+        if (this.totalDeElementos == 0){
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        return ultima.getElemento();
+    }
+
     public void adicionaNoComeco (Object elemento) {
         if (totalDeElementos ==0){
             Celula nova = new Celula (elemento);
@@ -26,10 +41,11 @@ public class ListaLigada {
         Celula atual = this.primeira;
         StringBuilder builder = new StringBuilder("[");
         for (int i=0; i < totalDeElementos; i++){
-            builder.append(atual.getElemento());
-            builder.append(",");
+                builder.append(atual.getElemento());
+                builder.append(atual.getIdentificador());
+                builder.append(",");
 
-            atual = atual.getProximo();
+                atual = atual.getProximo();
         }
         builder.append("]");
 
@@ -40,13 +56,14 @@ public class ListaLigada {
 
         if (this.totalDeElementos == 0){
             adicionaNoComeco(elemento);
-        }
+        } else {
 
-        Celula nova = new Celula(elemento);
-        this.ultima.setProximo(nova);
-        nova.setAnterior(this.ultima);
-        this.ultima = nova;
-        this.totalDeElementos++;
+            Celula nova = new Celula(elemento);
+            this.ultima.setProximo(nova);
+            nova.setAnterior(this.ultima);
+            this.ultima = nova;
+            this.totalDeElementos++;
+        }
     }
 
     private boolean posicaoOcupada (int posicao) {
@@ -64,21 +81,21 @@ public class ListaLigada {
         return atual;
     }
 
-    public void adiciona (int posicao, Object elemento) {
+    public void adiciona(int posicao, Object elemento) {
 
         if (posicao == 0) {
             adicionaNoComeco(elemento);
         } else if (posicao == this.totalDeElementos) {
             adicionarNoFinal(elemento);
         } else {
-            Celula anterior = this.pegaCelula(posicao - 1);
+            Celula anterior = this.pegaCelula(posicao-1);
             Celula proxima = anterior.getProximo();
 
             Celula nova = new Celula(elemento, anterior.getProximo());
             nova.setAnterior(anterior);
             anterior.setProximo(nova);
             proxima.setAnterior(nova);
-            proxima.setAnterior(nova);
+
             this.totalDeElementos++;
         }
     }
@@ -99,21 +116,45 @@ public class ListaLigada {
             removeDoComeco();
         }
         else if (posicao == totalDeElementos){
+            removerNoFinal();
+        } else {
             Celula anterior = this.pegaCelula(posicao - 1);
-            ultima = anterior;
-            totalDeElementos --;
+            Celula atual = anterior.getProximo();
+            Celula proximo = atual.getProximo();
+
+            anterior.setProximo(proximo);
+            proximo.setAnterior(anterior);
+            totalDeElementos--;
         }
-        pegaCelula(posicao-1).setProximo(pegaCelula(posicao+1));
-        totalDeElementos--;
     }
 
     public void removerNoFinal(){
-        remove(totalDeElementos);
+        if(this.totalDeElementos == 0){
+            throw new IllegalArgumentException("Lista vazia");
+        }
+
+        if(this.totalDeElementos == 1){
+            this.removeDoComeco();
+            totalDeElementos--;
+        } else {
+            Celula penultima = this.ultima.getAnterior();
+            penultima.setProximo(null);
+            this.ultima = penultima;
+            totalDeElementos--;
+        }
     }
     public int tamanho(){
         return this.totalDeElementos;
     }
     public boolean contem(Object elemento){
-        return true;
+        Celula atual = this.primeira;
+
+        while (atual!=null){
+            if(atual.getElemento().equals(elemento)){
+                return true;
+            }
+            atual = atual.getProximo();
+        }
+        return false;
     }
 }

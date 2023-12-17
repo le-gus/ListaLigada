@@ -24,8 +24,17 @@ public class testeListaLigada {
         System.out.println(lista.pega(2));
         System.out.println(lista.tamanho());
 
-        lista.remove(1);
+        lista.removerNoFinal();
         System.out.println(lista);
 
+        lista.adicionaNoComeco("Thiago");
+        System.out.println(lista);
+        lista.adicionaNoComeco("Anderson");
+        System.out.println(lista);
+        lista.adicionaNoComeco("Gilmar");
+        System.out.println(lista);
+
+        System.out.println(lista.contem("Anderson"));
+        System.out.println(lista.contem("Osnildo"));
     }
 }

@@ -1,6 +1,9 @@
 package lista;
 
 public class Celula {
+
+
+    private int identificador;
     private Object elemento;
     private  Celula proximo;
     private  Celula anterior;
@@ -34,4 +37,12 @@ public class Celula {
     public void setAnterior(Celula anterior) {
         this.anterior = anterior;
     }
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+
 }

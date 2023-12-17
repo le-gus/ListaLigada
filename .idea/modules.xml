@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ListaLigada.iml" filepath="$PROJECT_DIR$/ListaLigada.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EstruturasDeDadosJAVA.iml" filepath="$PROJECT_DIR$/EstruturasDeDadosJAVA.iml" />
     </modules>
   </component>
 </project>
